@@ -28,7 +28,7 @@ Para máquinas com Windows
 ```
 $ .\env\Scripts\activate
 ```
-Para máquinas com Linux 3.2
+Para máquinas com Linux
 ```
 $ source env/bin/activate
 ```
