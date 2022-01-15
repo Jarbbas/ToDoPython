@@ -11,7 +11,7 @@ O objetivo inicial deste fork é aprender mais sobre o desevolvimento web com Py
 Este projeto é baseado num fork do auto https://github.com/jakerieger
 
 ### Como correr este projeto
-```
+
 Abrir o terminal do projeto e na pasta do mesmo, correr os seguintes comandos:
 1) Instalar o `virtualenv`, o ambiente virtual para correr o projeto;
 2) Iniciar `virtualenv`, e o nome da pasta como (env)
@@ -19,23 +19,26 @@ Abrir o terminal do projeto e na pasta do mesmo, correr os seguintes comandos:
 4) Instalar as dependências necessárias para correr os serviços
 5) Iniciar o servidor Flask
 ``` 
-1. $ pip install virtualenv
-2. $ virtualenv env
+$ pip install virtualenv
 ```
-Para máquinas com Windows 3.1
+```
+$ virtualenv env
+```
+Para máquinas com Windows 
+```
+$ .\env\Scripts\activate
+```
 Para máquinas com Linux 3.2
 ```
-3.1. $ .\env\Scripts\activate
-3.2. $ source env/bin/activate
+$ source env/bin/activate
 ```
 Instalar os requisitos
 ```
-4. $ (env) pip install -r requirements.txt
+$ (env) pip install -r requirements.txt
 ```
 Iniciar o servidor 
 ```
-6. $ (env) python app.py
-
+$ (env) python app.py
 ```
 O servidor vai correr por defeito na porta 5050, de forma a evitar confusões com outros servidores
 Mas podem alterar essa configuração no ficheiro app.py
