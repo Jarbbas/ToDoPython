@@ -22,15 +22,19 @@ Abrir o terminal do projeto e na pasta do mesmo, correr os seguintes comandos:
 1. $ pip install virtualenv
 2. $ virtualenv env
 ```
-For Windows machines
+Para máquinas com Windows 3.1
+Para máquinas com Linux 3.2
 ```
-3. $ .\env\Scripts\activate
+3.1. $ .\env\Scripts\activate
+3.2. $ source env/bin/activate
 ```
-For Linux machines
+Instalar os requisitos
 ```
-3. $ source env/bin/activate
 4. $ (env) pip install -r requirements.txt
-5. $ (env) python app.py
+```
+Iniciar o servidor 
+```
+6. $ (env) python app.py
 
 ```
 O servidor vai correr por defeito na porta 5050, de forma a evitar confusões com outros servidores
