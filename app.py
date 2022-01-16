@@ -1,65 +1,68 @@
 from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-
+#from flask_sqlalchemy import SQLAlchemy
+#from datetime import datetime
+from classes.Tasks import Task
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-db = SQLAlchemy(app)
-
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<Task %r>' % self.id
-
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
+       task = request.form['new_task']
 
-        try:
-            db.session.add(new_task)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding your task'
+       try:
+           newTask=Task()
+           newTask.addTask(task)
+           return redirect('/')
+       except:
+           return 'There was an issue adding your task'
 
     else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        data=Task()
+        return render_template("index.html", tasks=data.allTasks())
 
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
-
     try:
-        db.session.delete(task_to_delete)
-        db.session.commit()
+        task_to_delete=Task()
+        task_to_delete.deleteTask(id)
         return redirect('/')
     except:
         return 'There was a problem deleting that task'
 
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
 def update(id):
-    task = Todo.query.get_or_404(id)
-
+     
     if request.method == 'POST':
-        task.content = request.form['content']
-
+        taskUpdated = request.form['taskUpdated']
+        
         try:
-            db.session.commit()
+            task_to_update=Task()
+            task_to_update.updateTask(taskUpdated,id)
             return redirect('/')
         except:
             return 'There was an issue updating your task'
 
     else:
-        return render_template('update.html', task=task)
+        task=Task() 
+        return render_template('update.html', data=task.getTask(id))
+
+@app.route('/alterState')
+def alterState():
+    id = request.args.get('id')
+    state = request.args.get('state')
+    if state=='0':
+        newstate=1
+    else:
+        newstate=0
+        
+    try:
+        task_alter_state=Task()
+        task_alter_state.alterTask(newstate,id)
+        return redirect('/')
+    except:
+        return 'There was an issue altering your task'
 
 
 if __name__ == "__main__":

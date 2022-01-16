@@ -21,17 +21,17 @@ Abrir o terminal do projeto e na pasta do mesmo, correr os seguintes comandos:
 ``` 
 $ pip install virtualenv
 ```
+Para Linux
 ```
 $ virtualenv env
-```
-Para máquinas com Windows 
-```
-$ .\env\Scripts\activate
-```
-Para máquinas com Linux
-```
 $ source env/bin/activate
 ```
+Para Windows 
+```
+$ python -m venv
+$ .\env\Scripts\activate
+```
+
 Instalar os requisitos
 ```
 $ (env) pip install -r requirements.txt
